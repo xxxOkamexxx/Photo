@@ -12,8 +12,8 @@ USE Photos;
 CREATE TABLE photos (
   id integer NOT NULL AUTO_INCREMENT,
   title varchar(255) NOT NULL,
-  url varchar(255) DEFAULT NULL,
-  comment varchar(255) NOT NULL,
+  url varchar(255) NOT NULL,
+  comment varchar(255) DEFAULT NULL,
   PRIMARY KEY (id)
 );
 
@@ -21,7 +21,7 @@ CREATE TABLE photos (
 -- DROP TABLES albums;
 CREATE TABLE albums (
   id integer NOT NULL AUTO_INCREMENT,
-  album_title varchar(255) NOT NULL,
+  title varchar(255) NOT NULL,
   PRIMARY KEY (id)
 );
 
@@ -35,6 +35,18 @@ CREATE TABLE users (
   last_name varchar(255) NOT NULL,
   PRIMARY KEY (id)
 );
+
+-- DROOP TABLES albums_users
+CREATE TABLE albums_users (
+  id integer NOT NULL AUTO_INCREMENT,
+  album_id integer NOT NULL,
+  user_id integer NOT NULL, 
+  PRIMARY KEY(id),
+  FOREIGN KEY(album_id) REFERENCES albums(id),
+  FOREIGN KEY(user_id) REFERENCES users(id)
+);
+
+
 
 
 -- ---------------
@@ -51,7 +63,7 @@ VALUES
 
 
 -- albums
-INSERT INTO albums (album_title)
+INSERT INTO albums (title)
 VALUES
 	('cute cats'),
 	('funny animals');
@@ -62,3 +74,8 @@ VALUES
 	('johan@mail.se','asdf','Johan','Nordström'),
 	('sean_banan@epost.com','chiquita','Sean','Banan');
 
+-- albums_users
+INSERT INTO albums_users (album_id, user_id)
+VALUES
+	('1','1'),
+	('2','1');

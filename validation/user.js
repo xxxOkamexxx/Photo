@@ -20,9 +20,9 @@ const createRules = [
 
 		return Promise.resolve();
 	}),
-	body('paassword').exists().isLength({ min: 6 }),
+	body('password').exists().isLength({ min: 6 }),
 	body('first_name').isLength({ min: 3 }),
-	body('email').isLength({ min: 3 }),
+	body('last_name').isLength({ min: 3 }),
 	/**
 	 *  email string required must be a valid email and not already exist
 	 * password string required must be at least 6 chars long
@@ -46,11 +46,10 @@ const updateRules = [
 		}
 
 		return Promise.resolve();
-	}),,
+	}),
 	body('password').optional().isLength({ min: 6 }),
-	body('title').optional().isLength({ min: 4 }),
 	body('first_name').optional().isLength({ min: 3 }),
-	body('email').optional().isLength({ min: 3 }),
+	body('last_name').optional().isLength({ min: 3 }),
 	/**
 	 * email string required must be a valid email and exist
 	 * password string required must be at least 6 chars long

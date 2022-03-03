@@ -36,18 +36,6 @@ CREATE TABLE users (
   PRIMARY KEY (id)
 );
 
--- DROOP TABLES albums_users
-CREATE TABLE albums_users (
-  id integer NOT NULL AUTO_INCREMENT,
-  album_id integer NOT NULL,
-  user_id integer NOT NULL, 
-  PRIMARY KEY(id),
-  FOREIGN KEY(album_id) REFERENCES albums(id),
-  FOREIGN KEY(user_id) REFERENCES users(id)
-);
-
-
-
 
 -- ---------------
 -- INSERT DATA
@@ -74,8 +62,3 @@ VALUES
 	('johan@mail.se','asdf','Johan','Nordström'),
 	('sean_banan@epost.com','chiquita','Sean','Banan');
 
--- albums_users
-INSERT INTO albums_users (album_id, user_id)
-VALUES
-	('1','1'),
-	('2','1');

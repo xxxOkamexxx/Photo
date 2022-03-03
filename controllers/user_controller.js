@@ -98,7 +98,7 @@ const update = async (req, res) => {
 
 	try {
 		const updatedUser = await user.save(validData);
-		debug("Updated user successfully: %O", updatedExample);
+		debug("Updated user successfully: %O", updatedUser);
 
 		res.send({
 			status: 'success',

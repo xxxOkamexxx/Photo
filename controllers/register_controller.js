@@ -28,10 +28,9 @@ const register = async (req, res) => {
 	// and overwrite `validData.password` with the generated hash
 
 	try {
-		console.log("bcrypt");
 		validData.password = await bcrypt.hash(validData.password, 10);
-		console.log(validData.password);
-		debug("Created new hash successfully: %O");
+		//console.log(validData.password); // check genelated "hash"
+		debug("Created new hash successfully: %O"); 
 
 	} catch (error) {
 		res.status(500).send({

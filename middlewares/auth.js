@@ -3,7 +3,7 @@
  */
 
  const bcrypt = require('bcrypt');
- const debug = require('debug')('books:auth');
+ const debug = require('debug')('photos:auth');
  const { User } = require('../models');
  
  /**

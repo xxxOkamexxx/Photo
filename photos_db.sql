@@ -1,6 +1,6 @@
 SELECT VERSION();
 
-CREATE DATABASE Photos;
+CREATE DATABASE photos;
 
 USE Photos;
 

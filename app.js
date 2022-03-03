@@ -1,10 +1,11 @@
 const express = require('express');
 const cors = require('cors');
 const logger = require('morgan');
-const { body, matchedData, validationResult } = require('express-validator');
+//const { body, matchedData, validationResult } = require('express-validator');
 
 // instantiate express
 const app = express();
+
 
 // middlewares
 app.use(logger('dev'));

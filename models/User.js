@@ -6,10 +6,10 @@ module.exports = (bookshelf) => {
 	return bookshelf.model('User', {
 		tableName: 'users',
 		photos(){
-			return this.belongsToMany('Photos')
+			return this.hasMany('Photos')
 		},
 		albums(){
-			return this.belongsToMany('Albums')
+			return this.hasMany('Albums')
 		},
 	});
 };

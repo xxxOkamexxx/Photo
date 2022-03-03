@@ -11,7 +11,7 @@ router.get('/', (req, res, next) => {
 router.use('/photos', require('./photos'));
 router.use('/albums', require('./albums'));
 router.use('/profile', auth.basic, require('./profile'));
-//router.use('/users', require('./users'));
+router.use('/users', require('./users'));
 
 //register a new user
 router.post('/register', userValidationRules.createRules, registerController.register);

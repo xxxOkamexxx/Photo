@@ -9,7 +9,7 @@ module.exports = (bookshelf) => {
 			return this.belongsToMany('Photo');
 		},
 		users() {
-			return this.belongsTo('user');
+			return this.belongsTo('User');
 		},
 	});
 };

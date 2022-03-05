@@ -39,7 +39,7 @@ const createRules = [
  * Optional: title
  */
 const updateRules = [
-	body('email').optional().isEmail().exists().custom(async value => {
+	body('email').exists().optional().isEmail().custom(async value => {
 		const user = await new models.User({ email: value }).fetch({ require: false });
 		if (user) {
 			return Promise.reject("Email already exists.")

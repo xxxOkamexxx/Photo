@@ -3,10 +3,11 @@ const router = express.Router();
 const auth = require('../middlewares/auth');
 const registerController = require('../controllers/register_controller');
 const userValidationRules = require('../validation/user');
+
 /* GET / */
 router.get('/', (req, res, next) => {
 	res.send({ success: true, data: { msg: 'oh, hi' }});
-});
+}); // test
 
 router.use('/photos', require('./photos'));
 router.use('/albums', require('./albums'));

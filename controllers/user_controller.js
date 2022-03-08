@@ -7,7 +7,7 @@ const { matchedData, validationResult } = require('express-validator');
 const models = require('../models');
 
 /**
- * Get all resources
+ * Get all users
  *
  * GET /
  */
@@ -21,7 +21,7 @@ const index = async (req, res) => {
 }
 
 /**
- * Get a specific resource
+ * Get a specific user
  *
  * GET /:userId
  */
@@ -36,7 +36,7 @@ const show = async (req, res) => {
 }
 
 /**
- * Store a new resource
+ * Store a new user
  *
  * POST /
  */
@@ -71,7 +71,7 @@ const store = async (req, res) => {
 }
 
 /**
- * Update a specific resource
+ * Update a specific user
  *
  * PUT /:userId
  */

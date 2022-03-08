@@ -25,10 +25,6 @@
      debug("Authorization header: %o", req.headers.authorization);
  
      // split header into "<authSchema> <base64Payload>"
-     // "Basic cGVsbGU6c3ZhbnNsb3M="
-     // =>
-     // [0] = "Basic"
-     // [1] = "cGVsbGU6c3ZhbnNsb3M="
      const [authSchema, base64Payload] = req.headers.authorization.split(' ');
  
      // if authSchema isn't "basic", then bail
@@ -68,7 +64,7 @@
          });
      }
  
-     // finally, attach user to request
+     // attach user to request
      req.user = user;
  
      // pass request along

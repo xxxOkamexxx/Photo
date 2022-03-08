@@ -7,7 +7,7 @@ const { matchedData, validationResult } = require('express-validator');
 const models = require('../models');
 
 /**
- * Get all resources
+ * Get all albums
  *
  * GET /
  */
@@ -17,13 +17,13 @@ const index = async (req, res) => {
 	res.send({
 		status: 'success',
 		data: {
-			alubums: all_albums
+			albums: all_albums
 		},
 	});
 }
 
 /**
- * Get a specific resource
+ * Get a specific album
  *
  * GET /:albumId
  */
@@ -37,7 +37,7 @@ const show = async (req, res) => {
 }
 
 /**
- * Store a new resource
+ * Store a new album
  *
  * POST /
  */
@@ -67,10 +67,11 @@ const store = async (req, res) => {
 		});
 		throw error;
 	}
+	
 }
 
 /**
- * Update a specific resource
+ * Update a specific album
  *
  * PUT /:albumId
  */
@@ -115,8 +116,10 @@ const update = async (req, res) => {
 	}
 }
 
+
+
 /**
- * Destroy a specific resource
+ * Destroy a specific album
  *
  * DELETE /:albumId
  */
@@ -127,10 +130,64 @@ const destroy = (req, res) => {
 	});
 }
 
+/**
+ * Store a new photo to album
+ *
+ * POST /
+ */
+ const addPhoto = async (req, res) => {
+	// check for any validation errors
+	const errors = validationResult(req);
+	if (!errors.isEmpty()) {
+		return res.status(422).send({ status: 'fail', data: errors.array() });
+	}
+	
+	// get only the validated data from the request
+	const validData = matchedData(req);
+
+	// lazy-load photo relationship
+	await req.album.load('photos'); // <--- Det här går något fel
+
+	// get the album's photos
+	const photos = req.album.related('photos');
+
+	// check if photo is already in the album's list of photos
+	const existing_photo = photos.find(photo => photo.id == validData.photo_id);
+
+	// if it already exists, bail
+	if (existing_photo) {
+		return res.send({
+			status: 'fail',
+			data: 'Photo already exists.',
+		});
+	}
+
+	try {
+		const result = await req.album.photos().attach(validData.photo_id);
+		debug("Added photo to album successfully: %O", result);
+
+		res.send({
+			status: 'success',
+			data: null,
+		});
+
+	} catch (error) {
+		res.status(500).send({
+			status: 'error',
+			message: 'Exception thrown in database when adding a photo to a album.',
+		});
+		throw error;
+	}
+}
+
+
+
+
 module.exports = {
 	index,
 	show,
 	store,
 	update,
 	destroy,
+	addPhoto,
 }

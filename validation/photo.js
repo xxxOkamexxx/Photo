@@ -7,7 +7,7 @@ const models = require('../models');
 
 
 /**
- * Create Photo validation rules
+ * Create Photo validation rules POST
  *
  * Required: title, url, comment
  * Optional: -
@@ -16,13 +16,7 @@ const createRules = [
 	body('title').exists().isLength({ min: 3 }),
 	body('url').exists().isURL(),
 	body('comment').isLength({min: 3}),
-	body('user_id').exists().custom(async value => {
-		const user = await new models.User({ id: value }).fetch({ require: false });
-		if (!user) {
-			return Promise.reject(`User with ID ${value} does not exist.`);
-		}
-		return Promise.resolve();
-	}),
+	body('user_id').exists().custom(),
 	/**
 	 * title string required must be at least 3 chars long
 	 * url string required must be a url
@@ -31,7 +25,7 @@ const createRules = [
 ];
 
 /**
- * Update Photo validation rules
+ * Update Photo validation rules PUT
  *
  * Required: -
  * Optional: title, url, comment
@@ -40,13 +34,7 @@ const updateRules = [
 	body('title').optional().isLength({ min: 3 }),
 	body('url').optional().exists().isURL(),
 	body('comment').optional().isLength({min: 3}),
-	body('user_id').exists().custom(async value => {
-		const user = await new models.User({ id: value }).fetch({ require: false });
-		if (!user) {
-			return Promise.reject(`User with ID ${value} does not exist.`);
-		}
-		return Promise.resolve();
-	}),
+	body('user_id').optional().custom(),
 	/**
 	 * title string must be at least 3 chars long
 	 * url string must be a url

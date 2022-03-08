@@ -7,6 +7,7 @@ const debug = require('debug')('photos:profile_controller');
 const { matchedData, validationResult } = require('express-validator');
 
 
+
 /**
  * Get authenticated user's profile
  *
@@ -16,7 +17,7 @@ const getProfile = async (req, res) => {
     res.send({
         status: 'success',
         data: {
-            user: req.user,
+            user: null,
         }
     });
 }
@@ -110,8 +111,6 @@ const getPhoto = async (req, res) => {
 
 /**
  *  Add a photo to the authenticated user
- * @todo  1. Validate that the photo actually exists
- * @todo  2. Validate that the photo they are trying to add isn't already in the list
  */
  const addPhoto = async (req, res) => {
 	// check for any validation errors
@@ -123,26 +122,26 @@ const getPhoto = async (req, res) => {
 	// get only the validated data from the request
 	const validData = matchedData(req);
 
-	// lazy-load book relationship
-	await req.user.load('books');
+	// lazy-load photo relationship
+	await req.user.load('photos');
 
-	// get the user's books
-	const books = req.user.related('books');
+	// get the user's photos
+	const photos = req.user.related('photos');
 
-	// check if book is already in the user's list of books
-	const existing_book = books.find(book => book.id == validData.book_id);
+	// check if photo is already in the user's list of photos
+	const existing_photo = photos.find(photos => photo.id == validData.photo_id);
 
 	// if it already exists, bail
-	if (existing_book) {
+	if (existing_photo) {
 		return res.send({
 			status: 'fail',
-			data: 'Book already exists.',
+			data: 'Photo already exists.',
 		});
 	}
 
 	try {
-		const result = await req.user.books().attach(validData.book_id);
-		debug("Added book to user successfully: %O", result);
+		const result = await req.user.photos().attach(validData.photo_id);
+		debug("Added photo to user successfully: %O", result);
 
 		res.send({
 			status: 'success',
@@ -152,16 +151,14 @@ const getPhoto = async (req, res) => {
 	} catch (error) {
 		res.status(500).send({
 			status: 'error',
-			message: 'Exception thrown in database when adding a book to a user.',
+			message: 'Exception thrown in database when adding a photo to a user.',
 		});
 		throw error;
 	}
 }
 
 /**
- *  Add an alubum to the authenticated user
- * @todo  1. Validate that the album actually exists
- * @todo  2. Validate that the album they are trying to add isn't already in the list
+ *  Add an album to the authenticated user
  */
  const addAlbum = async (req, res) => {
 	// check for any validation errors
@@ -173,26 +170,26 @@ const getPhoto = async (req, res) => {
 	// get only the validated data from the request
 	const validData = matchedData(req);
 
-	// lazy-load book relationship
-	await req.user.load('books');
+	// lazy-load album relationship
+	await req.user.load('albums');
 
-	// get the user's books
-	const books = req.user.related('books');
+	// get the user's albums
+	const user = req.user.related('albums');
 
-	// check if book is already in the user's list of books
-	const existing_book = books.find(book => book.id == validData.book_id);
+	// check if album is already in the user's list of albums
+	const existing_user = albums.find(album => album.id == validData.user_id);
 
 	// if it already exists, bail
-	if (existing_book) {
+	if (existing_user) {
 		return res.send({
 			status: 'fail',
-			data: 'Book already exists.',
+			data: 'album already exists.',
 		});
 	}
 
 	try {
-		const result = await req.user.books().attach(validData.book_id);
-		debug("Added book to user successfully: %O", result);
+		const result = await req.user.albums().attach(validData.user_id);
+		debug("Added album to user successfully: %O", result);
 
 		res.send({
 			status: 'success',
@@ -202,7 +199,7 @@ const getPhoto = async (req, res) => {
 	} catch (error) {
 		res.status(500).send({
 			status: 'error',
-			message: 'Exception thrown in database when adding a book to a user.',
+			message: 'Exception thrown in database when adding a album to a user.',
 		});
 		throw error;
 	}

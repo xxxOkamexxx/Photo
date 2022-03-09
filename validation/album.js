@@ -14,8 +14,8 @@ const models = require('../models');
  */
 const createRules = [
 	body('title').exists().isLength({ min: 4 }),
-	body('user_id').exists().custom(),	
-	body('photo_id').exists().custom(),	
+	body('user_id').exists(),	
+	body('photo_id').exists(),	
 	/**
 	 * title string required must be at least 3 chars long
 	 */
@@ -29,8 +29,8 @@ const createRules = [
  */
 const updateRules = [
 	body('title').optional().isLength({ min: 4 }),
-	body('user_id').exists().custom(),	
-	body('photo_id').exists().custom(),	
+	body('user_id').exists(),	
+	body('photo_id').exists(),	
 	/**
 	 * title string required must be at least 3 chars long
 	 */

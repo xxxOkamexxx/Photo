@@ -56,7 +56,9 @@ const store = async (req, res) => {
 
 		res.send({
 			status: 'success',
-			data: photo,
+			data: {
+				photo,
+			}
 		});
 
 	} catch (error) {
@@ -102,7 +104,9 @@ const update = async (req, res) => {
 
 		res.send({
 			status: 'success',
-			data: photo,
+			data: {
+				photo,
+			}
 		});
 
 	} catch (error) {
@@ -125,6 +129,7 @@ const destroy = (req, res) => {
 		message: 'You need to write the code for deleting this resource yourself.',
 	});
 }
+
 
 module.exports = {
 	index,

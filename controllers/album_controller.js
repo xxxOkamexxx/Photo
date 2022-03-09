@@ -32,7 +32,9 @@ const show = async (req, res) => {
 
 	res.send({
 		status: 'success',
-		data: album,
+		data: {
+			album,
+		}
 	});
 }
 
@@ -57,7 +59,9 @@ const store = async (req, res) => {
 
 		res.send({
 			status: 'success',
-			data: album,
+			data: {
+				album,
+			}
 		});
 
 	} catch (error) {

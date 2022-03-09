@@ -47,7 +47,7 @@ const register = async (req, res) => {
 		res.send({
 			status: 'success',
 			data:{
-				user,
+				user: req.user,
 			},
 		});
 	} catch (error) {

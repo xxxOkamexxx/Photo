@@ -2,7 +2,7 @@
  * Album model
  */
 
-module.exports = (bookshelf) => {
+ module.exports = (bookshelf) => {
 	return bookshelf.model('Album', {
 		tableName: 'albums',
 		photos() {

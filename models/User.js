@@ -2,7 +2,7 @@
  * User model
  */
 
-module.exports = (bookshelf) => {
+ module.exports = (bookshelf) => {
 	return bookshelf.model('User', {
 		tableName: 'users',
 		photos(){

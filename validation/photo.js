@@ -16,7 +16,7 @@ const createRules = [
 	body('title').exists().isLength({ min: 3 }),
 	body('url').exists().isURL(),
 	body('comment').isLength({min: 3}),
-	body('user_id').exists(),
+	
 	/**
 	 * title string required must be at least 3 chars long
 	 * url string required must be a url
@@ -34,7 +34,7 @@ const updateRules = [
 	body('title').optional().isLength({ min: 3 }),
 	body('url').optional().exists().isURL(),
 	body('comment').optional().isLength({min: 3}),
-	body('user_id').optional(),
+	
 	/**
 	 * title string must be at least 3 chars long
 	 * url string must be a url

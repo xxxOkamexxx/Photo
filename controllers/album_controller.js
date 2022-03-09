@@ -148,9 +148,8 @@ const destroy = (req, res) => {
 	
 	// get only the validated data from the request
 	const validData = matchedData(req);
-
 	// lazy-load photo relationship
-	await req.album.load('photos'); // <--- Det här går något fel
+	await req.album.load('photos'); // <--- ⚠️ Det här går något fel.
 
 	// get the album's photos
 	const photos = req.album.related('photos');

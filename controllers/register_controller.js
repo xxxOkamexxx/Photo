@@ -46,9 +46,13 @@ const register = async (req, res) => {
 
 		res.send({
 			status: 'success',
+			/* ⚠️ det visas inte password när man registrera sig
+			(det fungerar i lokalhost:4000 men fungerar inte i heroku. jag vet inte varför.)*/
 			data:{
-				user: req.user,
-			},
+				email: validData.email,
+				first_name: validData.first_name,
+				last_name: validData.last_name,
+			}, 
 		});
 	} catch (error) {
 		res.status(500).send({

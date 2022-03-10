@@ -13,7 +13,7 @@
   */
  const createRules = [
 	 body('title').exists().isLength({ min: 4 }),
-	 body('user_id').exists().bail().custom(async value => {
+	 body('user_id').exists().isInt({ min: 1 }).bail().custom(async value => {
 		const user = await new models.User({ id: value }).fetch({ require: false });
 		// check if Album have a user_id
 		if (!user) {
@@ -35,7 +35,7 @@
   */
  const updateRules = [
 	 body('title').optional().isLength({ min: 4 }),
-	 body('user_id').optional().bail().custom(async value => {
+	 body('user_id').optional().isInt({ min: 1 }).bail().custom(async value => {
 		const user = await new models.User({ id: value }).fetch({ require: false });
 		// check if Album have a user_id
 		if (!user) {
@@ -56,14 +56,7 @@
   * Optional: -
   */
   const addPhotoRules = [
-	 body('photo_id').exists().bail().custom(async value => {
-		 const photo = await new models.Photo({ id: value }).fetch({ require: false });
-		 if (!photo) { 
-			 return Promise.reject(`Photo with ID ${value} does not exist.`);
-		 }
- 
-		 return Promise.resolve();
-	 }),
+	 body('photo_id').exists().isInt({ min: 1 }),		
  ];
  
  

@@ -120,8 +120,6 @@ const update = async (req, res) => {
 	}
 }
 
-
-
 /**
  * Destroy a specific album
  *
@@ -139,7 +137,7 @@ const destroy = (req, res) => {
  *
  * POST /
  */
- const addPhoto = async (req, res) => {
+ const addPhoto = async (req, res) => {	
 	// check for any validation errors
 	const errors = validationResult(req);
 	if (!errors.isEmpty()) {
@@ -148,30 +146,23 @@ const destroy = (req, res) => {
 	
 	// get only the validated data from the request
 	const validData = matchedData(req);
-	// lazy-load photo relationship
-	await req.album.load('photos'); // <--- ⚠️ Det här går något fel.
-
-	// get the album's photos
-	const photos = req.album.related('photos');
-
-	// check if photo is already in the album's list of photos
-	const existing_photo = photos.find(photo => photo.id == validData.photo_id);
-
-	// if it already exists, bail
-	if (existing_photo) {
-		return res.send({
-			status: 'fail',
-			data: 'Photo already exists.',
-		});
-	}
 
 	try {
+		//console.log('error check: ', models.Album);
 		const result = await req.album.photos().attach(validData.photo_id);
+		// ⚠️ Error 500
+		// ⚠️ Cannot read properties of undefined (reading 'photos')
+		// cheked -- models.Album har photos(). 
+		// Det verkar inte läser in models.Album.
+		//  models.Album => [Function ()]
+		
 		debug("Added photo to album successfully: %O", result);
 
 		res.send({
 			status: 'success',
-			data: null,
+			data: {
+				result: result,
+			}
 		});
 
 	} catch (error) {

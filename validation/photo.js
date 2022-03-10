@@ -14,7 +14,14 @@ const models = require('../models');
  */
 const createRules = [
 	body('title').exists().isLength({ min: 3 }),
-	body('url').exists().isURL(),
+	body('url').exists().isURL().custom(async value => {
+		const photo = await new models.Photo({ url: value }).fetch({ require: false });
+		if (photo) {
+			return Promise.reject("URL already exists.")
+		}
+
+		return Promise.resolve();
+	}),
 	body('comment').isLength({min: 3}),
 	
 	/**

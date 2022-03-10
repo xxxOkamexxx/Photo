@@ -11,5 +11,6 @@
 		users() {
 			return this.belongsTo('User'); //albums (n) : user (1)
 		},
+
 	});
 };

@@ -21,7 +21,7 @@ router.get('/photos', profileController.getPhoto);
 /**
  * Get authenticated user's albumss
  */
- router.get('/albums', profileController.getAlbum);
+router.get('/albums', profileController.getAlbum);
 
 /**
  * Add a photos to the authenticated user

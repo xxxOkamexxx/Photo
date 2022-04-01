@@ -13,7 +13,7 @@ const models = require('../models');
  * POST /
  */
 const register = async (req, res) => {
-	// check for any validation errors
+	// check for any validation errors	
 	const errors = validationResult(req);
 	if (!errors.isEmpty()) {
 		return res.status(422).send({ status: 'fail', data: errors.array() });
@@ -21,8 +21,9 @@ const register = async (req, res) => {
 
 	// get only the validated data from the request
 	const validData = matchedData(req);
+	
+	debug("The validated data: ",validData);
 
-	console.log("The validated data: ",validData);
 
 	// generate a hash of `validData.password`
 	// and overwrite `validData.password` with the generated hash

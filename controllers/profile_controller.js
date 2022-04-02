@@ -139,7 +139,9 @@ const getPhoto = async (req, res) => {
 
 		res.send({
 			status: 'success',
-			data: null,
+			data: {
+                photos: req.user.related('photos')
+            },
 		});
 
 	} catch (error) {
@@ -187,7 +189,9 @@ const getPhoto = async (req, res) => {
 
 		res.send({
 			status: 'success',
-			data: null,
+			data:{
+                albums: req.user.related('albums')
+            }
 		});
 
 	} catch (error) {

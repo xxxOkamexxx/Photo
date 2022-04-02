@@ -76,11 +76,7 @@ const updateProfile = async (req, res) => {
  *  Get authenticated user's photos
  */
 const getPhoto = async (req, res) => {
-    // get user and also eager-load the photos-relation
-    //const user = await new models.User({ id: req.user.id }) 
-    //.fetch({ withRelated: ['photos'] });
 
-    // "lasy load" the photos-reration
     await req.user.load('photos');
 
     res.status(200).send({
@@ -95,17 +91,13 @@ const getPhoto = async (req, res) => {
  *  Get authenticated user's albums
  */
  const getAlbum = async (req, res) => {
-    // get user and also eager-load the photos-relation
-    //const user = await new models.User({ id: req.user.id }) 
-    //.fetch({ withRelated: ['photos'] });
-
-    // "lasy load" the photos-reration
+ 
     await req.user.load('albums');
 
     res.status(200).send({
         status: 'success',
         data:{
-            photos: req.user.related('albums'),
+            albums: req.user.related('albums'),
         },
     });
 }; 

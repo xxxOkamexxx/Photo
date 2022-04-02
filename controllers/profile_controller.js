@@ -92,12 +92,13 @@ const getPhoto = async (req, res) => {
  */
  const getAlbum = async (req, res) => {
  
-    await req.user.load('albums');
+    await req.user.load('albums','photos');
 
     res.status(200).send({
         status: 'success',
         data:{
             albums: req.user.related('albums'),
+            photos: req.user.related('photos')
         },
     });
 }; 

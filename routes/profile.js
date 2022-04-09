@@ -8,20 +8,9 @@ const profileValidationRules = require('../validation/profile');
  */
 router.get('/', profileController.getProfile);
 
-/**
- * Update authenticated user's profile
- */
-router.put('/', profileValidationRules.updateRules, profileController.updateProfile);
 
-/**
- * Get authenticated user's photos
- */
-router.get('/photos', profileController.getPhoto);
 
-/**
- * Get authenticated user's albumss
- */
-router.get('/albums', profileController.getAlbum);
+
 
 /**
  * Add a photos to the authenticated user
@@ -34,5 +23,11 @@ router.post('/photos', profileValidationRules.addPhotoRules, profileController.a
  *
  */
  router.post('/albums', profileValidationRules.addAlbumRules, profileController.addAlbum);
+
+ /**
+ * Add a photos into album to the authenticated user
+ *
+ */
+  router.post('/albums/:albumId/photos', profileValidationRules.addPhotoRules, profileController.addAlbumsPhoto);
 
 module.exports = router;

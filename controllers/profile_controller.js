@@ -23,88 +23,13 @@ const getProfile = async (req, res) => {
     });
 }
 
-/**
- * Update authenticated user's profile
- *
- * PUT /
- */
-const updateProfile = async (req, res) => {    
-    // check for any validation errors
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        return res.status(422).send({ status: 'fail', data: errors.array() });
-    }
 
-    // get only the validated data from the request
-    const validData = matchedData(req);
 
-    // update the user's password, but only if they sent us a new password
-    if (validData.password) {
-        try {
-            validData.password = await bcrypt.hash(validData.password,10);
-
-        } catch (error) {
-            res.status(500).send({
-                status: 'error',
-                message:'Exception thrown when hashing the password.'
-            });
-            throw error;
-        }
-    }
-
-    try {
-        const updatedUser = await user.save(validData);
-        debug("Updated user successfully: %O", updatedUser);
-
-        res.send({
-            status: 'success',
-            data: {
-                user:updatedUser,
-            },
-        });
-
-    } catch (error) {
-        res.status(500).send({
-            status: 'error',
-            message: 'Exception thrown in database when updating a new user.',
-        });
-        throw error;
-    }
-}
 
 /**
- *  Get authenticated user's photos
- */
-const getPhoto = async (req, res) => {
-
-    await req.user.load('photos');
-
-    res.status(200).send({
-        status: 'success',
-        data:{
-            photos: req.user.related('photos'),
-        },
-    });
-}; 
-
-/**
- *  Get authenticated user's albums
- */
- const getAlbum = async (req, res) => {
- 
-    await req.user.load('albums','photos');
-
-    res.status(200).send({
-        status: 'success',
-        data:{
-            albums: req.user.related('albums'),
-            photos: req.user.related('photos')
-        },
-    });
-}; 
-
-/**
- *  Add a photo to the authenticated user
+ *  Add a photo to the authenticated user 
+ * 
+ * POST /photos ⚠️
  */
  const addPhoto = async (req, res) => {
 	// check for any validation errors
@@ -116,14 +41,14 @@ const getPhoto = async (req, res) => {
 	// get only the validated data from the request
 	const validData = matchedData(req);
 
-	// lazy-load photo relationship
-	await req.user.load('photos');
+	// fetch user and eager-load photos relation
+	const user = await User.fetchById(req.user.user_id, { withRelated: ['photos'] });
 
 	// get the user's photos
-	const photos = req.user.related('photos');
+	const photos = user.related('photos');
 
 	// check if photo is already in the user's list of photos
-	const existing_photo = photos.find(photos => photo.id == validData.photo_id);
+	const existing_photo = photos.find(photo => photo.id == validData.photo_id);
 
 	// if it already exists, bail
 	if (existing_photo) {
@@ -134,14 +59,14 @@ const getPhoto = async (req, res) => {
 	}
 
 	try {
-		const result = await req.user.photos().attach(validData.photo_id);
+		const result = await user.photos().attach(validData.photo_id); 
+		// ⚠️ Error 500: not function  (Crashed)
+		// add user_id rules in photo's validation rules => change 'sync' to 'attach' => send Error 422.
 		debug("Added photo to user successfully: %O", result);
 
 		res.send({
 			status: 'success',
-			data: {
-                photos: req.user.related('photos')
-            },
+			data: null,
 		});
 
 	} catch (error) {
@@ -154,7 +79,7 @@ const getPhoto = async (req, res) => {
 }
 
 /**
- *  Add an album to the authenticated user
+ *  Add an album to the authenticated user ⚠️
  */
  const addAlbum = async (req, res) => {
 	// check for any validation errors
@@ -166,17 +91,21 @@ const getPhoto = async (req, res) => {
 	// get only the validated data from the request
 	const validData = matchedData(req);
 
+	// fetch user and eager-load books relation
+	const user = await User.fetchById(req.user.user_id, { withRelated: ['albums'] });
+
+
 	// lazy-load album relationship
-	await req.user.load('albums');
+	//await req.user.load('albums');
 
 	// get the user's albums
-	const user = req.user.related('albums');
+	const albums = user.related('albums');
 
 	// check if album is already in the user's list of albums
-	const existing_user = albums.find(album => album.id == validData.user_id);
+	const existing_album = albums.find(album => album.id == validData.album_id);
 
 	// if it already exists, bail
-	if (existing_user) {
+	if (existing_album) {
 		return res.send({
 			status: 'fail',
 			data: 'album already exists.',
@@ -184,14 +113,12 @@ const getPhoto = async (req, res) => {
 	}
 
 	try {
-		const result = await req.user.albums().attach(validData.user_id);
+		const result = await user.albums().attach(validData.album_id);
 		debug("Added album to user successfully: %O", result);
 
 		res.send({
 			status: 'success',
-			data:{
-                albums: req.user.related('albums')
-            }
+			data:null,
 		});
 
 	} catch (error) {
@@ -203,12 +130,68 @@ const getPhoto = async (req, res) => {
 	}
 }
 
+/**
+ * Store a new photo into album ⚠️
+ *
+ */
+ const addAlbumsPhoto = async (req, res) => {	
+	// check for any validation errors
+	const errors = validationResult(req);
+	if (!errors.isEmpty()) {
+		return res.status(422).send({ status: 'fail', data: errors.array() });
+	}
+	
+	// get only the validated data from the request
+	const validData = matchedData(req);
+
+	// fetch photos and album relation
+	const album = await newAlbum.fetchById(req.album.album_id,{ withRelated:['photos']});
+
+	// get the album's photos
+	const photos = album.related('photos');
+
+	// check if photo is already in the album
+	const existing_photo = photos.find(photo => photo.id == validData.photo_id);
+
+	// if photos already exists,
+	if( existing_photo){
+		return res.send({
+			status:'fail',
+			data: 'Photo already exists.'
+		});
+	}
+
+	try {
+		//console.log('error check: ', models.Album);
+		const result = await album.photos().attach(validData.photo_id);
+		// ⚠️ Error 500
+		// ⚠️ Cannot read properties of undefined (reading 'photos')
+		// cheked -- models.Album har photos(). 
+		// Det verkar inte läser in models.Album.
+		//  models.Album => [Function ()]
+		
+		debug("Added photo to album successfully: %O", result);
+
+		res.send({
+			status: 'success',
+			data: null
+		});
+
+	} catch (error) {
+		res.status(500).send({
+			status: 'error',
+			message: 'Exception thrown in database when adding a photo to a album.',
+		});
+		throw error;
+	}
+}
+
 
 module.exports = {
     getProfile,
-    updateProfile,
-    getPhoto,
-    getAlbum,
+   // getPhoto,
+   // getAlbum,
     addPhoto,
     addAlbum,
+	addAlbumsPhoto,
 }

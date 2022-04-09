@@ -50,6 +50,7 @@
 		 return Promise.resolve();
 	 }),
  ];
+
  
  module.exports = {
 	 addPhotoRules,

@@ -7,19 +7,21 @@ const { matchedData, validationResult } = require('express-validator');
 const models = require('../models');
 
 /**
- * Get all albums
+ * Get authenticated user's albums
  *
- * GET /
+ * GET /albums
  */
 const index = async (req, res) => {
-	const all_albums = await models.Album.fetchAll();
+	await req.user.load('albums','photos');
 
-	res.send({
-		status: 'success',
-		data: {
-			albums: all_albums
-		},
-	});
+    res.status(200).send({
+        status: 'success',
+        data:{
+            albums: req.user.related('albums'),
+            photos: req.user.related('photos')
+			// ⚠️ photos är tom även album har några photos.
+        },
+    });
 }
 
 /**
@@ -28,12 +30,13 @@ const index = async (req, res) => {
  * GET /:albumId
  */
 const show = async (req, res) => {
-	const album = await new models.Album({ id: req.params.albumId }).fetch({ withRelated: ['photos','users']});
+	await req.user.load('albums','photos');
 
-	res.send({
+	res.status(200).send({
 		status: 'success',
 		data: {
-			album,
+			albums: req.user.related('albums'),
+			photos: req.user.related('photos')
 		}
 	});
 }

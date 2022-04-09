@@ -7,17 +7,20 @@
  const models = require('../models');
  
  /**
-  * Get all photos
+  * Get authenticated user's photos
   *
   * GET /
   */
  const index = async (req, res) => {
-	 const all_fhotos = await models.Photo.fetchAll();
- 
-	 res.send({
-		 status: 'success',
-		 data: all_fhotos,
-	 });
+	 
+	await req.user.load('photos');
+
+    res.status(200).send({
+        status: 'success',
+        data:{
+            photos: req.user.related('photos'),
+        },
+    });
  }
  
  /**
@@ -25,15 +28,17 @@
   *
   * GET /:photoId
   */
- const show = async (req, res) => {
-	 const photo = await new models.Photo({ id: req.params.photoId })
-		 .fetch({ withRelated: ['users','albums']});
- 
-	 res.send({
-		 status: 'success',
-		 data: photo,
-	 });
- }
+  const show = async (req, res) => {
+	
+	const photo = await new models.Photo({ id: req.params.photoId });
+
+	res.send({
+		status: 'success',
+		data: {
+			photos: photo
+		}
+	});
+}
  
  /**
   * Store a new photo

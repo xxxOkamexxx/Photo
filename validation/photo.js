@@ -23,6 +23,17 @@ const createRules = [
 		return Promise.resolve();
 	}),
 	body('comment').isLength({min: 3}),
+	body('user_id').exists().isInt({ min: 1 }).bail().custom(async value => {
+		const user = await new models.User({ id: value }).fetch({ require: false });
+		// check if Album have a user_id
+		if (!user) {
+			return Promise.reject(`User with ID ${value} does not exist.`);
+		}
+
+		return Promise.resolve();
+	 })	
+	
+	
 	
 	/**
 	 * title string required must be at least 3 chars long
@@ -41,6 +52,15 @@ const updateRules = [
 	body('title').optional().isLength({ min: 3 }),
 	body('url').optional().exists().isURL(),
 	body('comment').optional().isLength({min: 3}),
+	body('user_id').optional().isInt({ min: 1 }).bail().custom(async value => {
+		const user = await new models.User({ id: value }).fetch({ require: false });
+		// check if Album have a user_id
+		if (!user) {
+			return Promise.reject(`User with ID ${value} does not exist.`);
+		}
+
+		return Promise.resolve();
+	 })	
 	
 	/**
 	 * title string must be at least 3 chars long

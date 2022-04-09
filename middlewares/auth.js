@@ -66,7 +66,7 @@
  
      // attach user to request
      req.user = user;
- 
+     debug('user: ', req.user);
      // pass request along
      next();
  }

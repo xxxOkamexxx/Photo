@@ -29,13 +29,12 @@
   * GET /:photoId
   */
   const show = async (req, res) => {
+	const photo = await new models.Photo({ id: req.params.photoId }).fetch({ withRelated: ['albums', 'users'] });
 	
-	const photo = await new models.Photo({ id: req.params.photoId });
-
-	res.send({
+	res.status(200).send({
 		status: 'success',
-		data: {
-			photos: photo
+		data: {			
+			photos: photo, //⚠️visas bara id
 		}
 	});
 }

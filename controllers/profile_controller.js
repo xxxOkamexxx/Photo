@@ -80,6 +80,8 @@ const getProfile = async (req, res) => {
 
 /**
  *  Add an album to the authenticated user ⚠️
+ * 
+ * POST/ albums
  */
  const addAlbum = async (req, res) => {
 	// check for any validation errors

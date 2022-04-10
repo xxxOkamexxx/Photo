@@ -30,13 +30,13 @@ const index = async (req, res) => {
  * GET /:albumId
  */
 const show = async (req, res) => {
-	await req.user.load('albums','photos');
+	const album = await new models.Album({ id: req.params.albumId }).fetch({ withRelated: ['photos', 'users'] });
 
 	res.status(200).send({
 		status: 'success',
 		data: {
-			albums: req.user.related('albums'),
-			photos: req.user.related('photos')
+			albums: album,
+			photos: null
 		}
 	});
 }

@@ -38,14 +38,15 @@ const getUserAlbum = async (req, res) => {
 	};
 
 	try {
-		const getAlbum = await new models.Album({ id: albumId }).fetch({ withRerated: ['photos']});
+		const getAlbumPhoto = await new models.Album.fetchById(req.params.albumId).fetch({ withRerated: ['photos']});
 
-		debug('album with photos: %o', getAlbum);
+		debug('album with photos: %o', getAlbumPhoto);
 
 		res.send({
 			status: 'success',
 			data: {
-				album: getAlbum,
+				album: album,
+				getAlbumPhoto,
 			}
 		});
 

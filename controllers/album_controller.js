@@ -45,8 +45,12 @@ const getUserAlbum = async (req, res) => {
 		res.send({
 			status: 'success',
 			data: {
-				album: album,
-				getAlbumPhoto,
+				album: {
+					id: 'id',
+					title: 'title',
+					getAlbumPhoto,
+				},
+				
 			}
 		});
 

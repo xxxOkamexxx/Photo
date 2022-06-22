@@ -10,9 +10,8 @@ router.get('/', (req, res, next) => {
 }); // test
 
 router.use('/photos', auth.basic, require('./photos'));
-router.use('/albums', auth.basic,require('./albums'));
-router.use('/profile', auth.basic, require('./profile'));
-//router.use('/users', require('./users'));
+router.use('/albums', auth.basic, require('./albums'));
+router.use('/users', auth.basic, require('./users'));
 
 //register a new user
 router.post('/register', userValidationRules.createRules, registerController.register);

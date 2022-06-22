@@ -38,7 +38,6 @@ const register = async (req, res) => {
 			status: 'error',
 			message: 'Exception thrown when hashing the password.',
 		});
-		throw error;
 	}
 
 	try {
@@ -47,20 +46,13 @@ const register = async (req, res) => {
 
 		res.send({
 			status: 'success',
-			/* ⚠️ det visas inte password när man registrera sig
-			(det fungerar i lokalhost:4000 men fungerar inte i heroku. jag vet inte varför.)*/
-			data:{
-				email: validData.email,
-				first_name: validData.first_name,
-				last_name: validData.last_name,
-			}, 
+			data: user
 		});
 	} catch (error) {
 		res.status(500).send({
 			status:'error',
 			message:'Exception thrown in database when creating a new user.'
 		});
-		throw error;
 	}
 }
 

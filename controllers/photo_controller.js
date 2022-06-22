@@ -11,7 +11,7 @@
   *
   * GET /
   */
- const index = async (req, res) => {
+ const getPhotos = async (req, res) => {
 	 
 	await req.user.load('photos');
 
@@ -28,15 +28,34 @@
   *
   * GET /:photoId
   */
-  const show = async (req, res) => {
-	const photo = await new models.Photo({ id: req.params.photoId }).fetch({ withRelated: ['albums', 'users'] });
+  const getUserPhoto = async (req, res) => {
+
+	const user = await new models.User({ id: req.user.id }).fetch({ withRelated: ['photos'] });
+
+	const errors = validationResult(req);
+	if(!errors.isEmpty()){
+		return res.status(422).send({ status: 'fail', data: errors.array() });
+	};
+
+	const validData = matchedData(req);
+
+	const photo = await user.related('photos').find(photo => photo.id == req.params.photoId);
 	
-	res.status(200).send({
-		status: 'success',
-		data: {			
-			photos: photo, //⚠️visas bara id
-		}
-	});
+	try {
+		const getPhoto = await photo.get(validData);
+		debug("Updated photo successfully: %o", getPhoto);
+
+		res.send({
+			status: 'success',
+			data: photo
+		});
+
+	} catch (error) {
+		res.status(404).send({
+			status: 'error',
+			message: 'Photo Not Found.',
+		});
+	};
 }
  
  /**
@@ -44,7 +63,7 @@
   *
   * POST /
   */
- const store = async (req, res) => {
+ const addPhoto = async (req, res) => {
 	 // check for any validation errors
 	 const errors = validationResult(req);
 	 if (!errors.isEmpty()) {
@@ -53,6 +72,7 @@
  
 	 // get only the validated data from the request
 	 const validData = matchedData(req);
+	 validData.user_id = req.user.get('id');
  
 	 try {
 		 const photo = await new models.Photo(validData).save();
@@ -60,9 +80,7 @@
  
 		 res.send({
 			 status: 'success',
-			 data: {
-				 photo,
-			 }
+			 data: photo,			 
 		 });
  
 	 } catch (error) {
@@ -70,16 +88,15 @@
 			 status: 'error',
 			 message: 'Exception thrown in database when creating a new photo.',
 		 });
-		 throw error;
-	 }
- }
+	 };
+ };
  
  /**
   * Update a specific photo
   *
   * PUT /:photoId
   */
- const update = async (req, res) => {
+ const updatePhoto = async (req, res) => {
 	 const photoId = req.params.photoId;
  
 	 // make sure photo exists
@@ -108,9 +125,7 @@
  
 		 res.send({
 			 status: 'success',
-			 data: {
-				 photo,
-			 }
+			 data: photo,
 		 });
  
 	 } catch (error) {
@@ -118,27 +133,13 @@
 			 status: 'error',
 			 message: 'Exception thrown in database when updating a new photo.',
 		 });
-		 throw error;
 	 }
- }
- 
- /**
-  * Destroy a specific photo
-  *
-  * DELETE /:photoId
-  */
- const destroy = (req, res) => {
-	 res.status(400).send({
-		 status: 'fail',
-		 message: 'You need to write the code for deleting this resource yourself.',
-	 });
  }
  
  
  module.exports = {
-	 index,
-	 show,
-	 store,
-	 update,
-	 destroy,
+	 getPhotos,
+	 getUserPhoto,
+	 addPhoto,
+	 updatePhoto,
  }

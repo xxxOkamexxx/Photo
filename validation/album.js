@@ -37,6 +37,7 @@
 	 body('title').optional().isLength({ min: 4 }),
 	 body('user_id').optional().isInt({ min: 1 }).bail().custom(async value => {
 		const user = await new models.User({ id: value }).fetch({ require: false });
+		
 		// check if Album have a user_id
 		if (!user) {
 			return Promise.reject(`User with ID ${value} does not exist.`);
@@ -55,7 +56,7 @@
   * Required: photo_id
   * Optional: -
   */
-  const addPhotoRules = [
+  const addPhotoToAlbumRules = [
 	 body('photo_id').exists().isInt({ min: 1 }),		
  ];
  
@@ -64,5 +65,5 @@
  module.exports = {
 	 createRules,
 	 updateRules,
-	 addPhotoRules,
+	 addPhotoToAlbumRules,
  }

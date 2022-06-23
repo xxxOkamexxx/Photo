@@ -57,7 +57,14 @@
   * Optional: -
   */
   const addPhotoToAlbumRules = [
-	 body('photo_id').exists().isInt({ min: 1 }),		
+	/*  body('photo_id').exists().isInt().bail().custom(async value => {
+		const photo = await new models.Photo({ id: value }).fetch({ require: false });
+		if (!photo){
+			return Promise.reject(`Photo ID ${value} doees not exist` );
+		}
+
+		return Promise.resolve();
+	 }), */		
  ];
  
  

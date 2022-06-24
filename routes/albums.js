@@ -17,7 +17,7 @@ router.post('/', albumValidationRules.createRules, albumController.addAlbum);
 router.put('/:albumId', albumValidationRules.updateRules, albumController.updateAlbum);
 
 /* Store a photo to album */
-router.post('/:albumId/photos', albumValidationRules.addPhotoToAlbumRules, albumController.addPhotoToAlbum);
+router.post('/:albumId/photos', albumValidationRules.addPhotoToAlbum, albumController.addPhotoToAlbum);
 
 
 module.exports = router;

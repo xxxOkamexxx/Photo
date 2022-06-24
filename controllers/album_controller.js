@@ -169,8 +169,7 @@ const updateAlbum = async (req, res) => {
  *
  * POST /
  */
- const addPhotoToAlbum = async (req, res) => {	
-
+ const addPhotoToAlbum = async (req, res) => {
 	// check for any validation errors
 	const errors = validationResult(req);
 
@@ -192,7 +191,7 @@ const updateAlbum = async (req, res) => {
 	const foundAlbum = albumRelation.find(album => album.id == oneAlbum.id);
 
 	if(!foundAlbum) {
-		res.status(404).send({
+		return res.status(404).send({
 			status: 'fail',
 			data: 'An album with that id could not be found',
 		});
@@ -207,7 +206,7 @@ const updateAlbum = async (req, res) => {
 
 	const foundPhoto = photoRelation.find(photo => photo.id == onePhoto.id);
 	
-	if(foundPhoto) {
+	if(!foundPhoto) {
 		return res.status(404).send({
             status: 'fail',
             data: 'A photo with that id could not be found'

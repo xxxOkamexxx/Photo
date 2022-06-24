@@ -22,7 +22,7 @@
   * Optional: title
   */
  const updateRules = [
-	 body('title').exists().isLength({ min: 3 })
+	 body('title').optional().isLength({ min: 3 })
  ];
  
  /**
@@ -31,18 +31,18 @@
   * Required: photo_id
   * Optional: -
   */
-  const addPhotoToAlbumRules = [
+  const addPhotoToAlbum= [
 	body('photo_id').exists().isInt().custom(async value => {
-		const photo = await new models.Photo({ id: value }).fetch({ require: false });
-		if (!photo){
-			return Promise.reject(`Photo ID ${value} doees not exist` );
-		}
-		return Promise.resolve();
-	}), 	
+        const photo = await new models.Photo({ id: value }).fetch({ require: false });
+        if (!photo) {
+            return Promise.reject(`Photo with id ${value} does not exist`);
+        }
+        return Promise.resolve();
+    }),
  ];
   
  module.exports = {
 	 createRules,
 	 updateRules,
-	 addPhotoToAlbumRules,
+	 addPhotoToAlbum,
  }

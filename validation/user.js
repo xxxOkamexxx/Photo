@@ -21,8 +21,8 @@ const createRules = [
 		return Promise.resolve();
 	}),
 	body('password').exists().trim().isLength({ min: 6 }),
-	body('first_name').trim().isLength({ min: 3 }),
-	body('last_name').trim().isLength({ min: 3 }),
+	body('first_name').exists().trim().isLength({ min: 3 }),
+	body('last_name').exists().trim().isLength({ min: 3 }),
 	/**
 	 *  email string required must be a valid email and not already exist
 	 * password string required must be at least 6 chars long

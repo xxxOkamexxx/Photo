@@ -19,7 +19,7 @@ const getPhotos = async (req, res) => {
 			status: 'success',
 			data: usersPhotos,
 		});
-		} catch (error) {
+	} catch (error) {
 		res.status(500).send({
 			status: 'error',
 			message: 'Exception thrown in database when loading photos'
@@ -50,7 +50,6 @@ const getUserPhoto = async (req, res) => {
 			data: 'A photo with that id could not be found'
 		});
 	}
-
 
 	try {
 		res.send({

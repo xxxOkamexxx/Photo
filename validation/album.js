@@ -31,7 +31,7 @@
   * Required: photo_id
   * Optional: -
   */
-  const addPhotoToAlbum= [
+  const addPhotoToAlbum= [  
 	body('photo_id').exists().isInt().custom(async value => {
         const photo = await new models.Photo({ id: value }).fetch({ require: false });
         if (!photo) {

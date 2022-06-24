@@ -134,7 +134,7 @@ const addPhoto = async (req, res) => {
 	const validData = matchedData(req);
 
 	try {
-		const updatedPhoto = await photo.save(validData);
+		const updatedPhoto = await foundPhoto.save(validData);
 		debug("Updated photo successfully: %O", updatedPhoto);
 
 		res.status(200).send({

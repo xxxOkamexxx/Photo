@@ -17,7 +17,6 @@ const createRules = [
 		if (user) {
 			return Promise.reject("Email already exists.")
 		}
-
 		return Promise.resolve();
 	}),
 	body('password').exists().trim().isLength({ min: 6 }),

@@ -49,7 +49,7 @@ const getUserAlbum = async (req, res) => {
         });
     };
 
-	const album = await new models.Album({ id: req.params.albumId }).fetch({ withRerated: ['photos'] })
+	const album = await new models.Album({ id: req.params.albumId }).fetch({ withRelated: ['photos']});
 
 	try {
         res.status(200).send({
@@ -174,7 +174,7 @@ const updateAlbum = async (req, res) => {
 	const errors = validationResult(req);
 
 	if (!errors.isEmpty()) {
-		return res.status(422).send({ status: 'fail', data: errors.array() });
+		return res.status(422).send({ status : "fail", data: errors.array() });
 	}
 
 	// get only the validated data from the request
@@ -213,7 +213,7 @@ const updateAlbum = async (req, res) => {
         });
 	}
 
-	const album = await new models.Album({ id: req.params.albumId}).fetch({ withRerated: ['photos'] });
+	const album = await new models.Album({ id: req.params.albumId }).fetch({ withRelated: ['photos'] });
 
 	const photos = album.related('photos');
 

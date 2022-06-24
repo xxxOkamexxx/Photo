@@ -1,0 +1,967 @@
+{
+	"info": {
+		"_postman_id": "6d8bc28c-5a51-40fc-a537-f555e6d6bc83",
+		"name": "PhotoAlbum-app(heroku)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User-01",
+			"item": [
+				{
+					"name": "photos",
+					"item": [
+						{
+							"name": "POST/photos-01",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "banananana",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "bob@mail.se",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"title\": \"Banana\",\n  \"url\": \"https://images.unsplash.com/photo-1605666807892-8c11d020bede?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2342&q=80\",\n  \"comment\": \"Banana\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://fierce-oasis-76941.herokuapp.com/photos",
+									"protocol": "https",
+									"host": [
+										"fierce-oasis-76941",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"photos"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "POST/photos-02",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "banananana",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "bob@mail.se",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"title\": \"Banana\",\n  \"url\": \"https://images.unsplash.com/photo-1604148482093-d55d6fc62400?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80\",\n  \"comment\": \"Banana!!!\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://fierce-oasis-76941.herokuapp.com/photos",
+									"protocol": "https",
+									"host": [
+										"fierce-oasis-76941",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"photos"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "POST/photos-03",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "banananana",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "bob@mail.se",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"title\": \"GELATO!!!\",\n  \"url\": \"https://images.unsplash.com/photo-1621096229451-38ce90f1035c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80\",\n  \"comment\": \"Gelato♪\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://fierce-oasis-76941.herokuapp.com/photos",
+									"protocol": "https",
+									"host": [
+										"fierce-oasis-76941",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"photos"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET/photos",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "banananana",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "bob@mail.se",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://fierce-oasis-76941.herokuapp.com/photos",
+									"protocol": "https",
+									"host": [
+										"fierce-oasis-76941",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"photos"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET/photos/id:11",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "banananana",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "bob@mail.se",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://fierce-oasis-76941.herokuapp.com/photos/11",
+									"protocol": "https",
+									"host": [
+										"fierce-oasis-76941",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"photos",
+										"11"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "PUT/photos/id:11",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "banananana",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "bob@mail.se",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"comment\": \"BANANAAAAAAAA!!!\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://fierce-oasis-76941.herokuapp.com/photos/11",
+									"protocol": "https",
+									"host": [
+										"fierce-oasis-76941",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"photos",
+										"11"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "albums",
+					"item": [
+						{
+							"name": "POST/albums-01",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "banananana",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "bob@mail.se",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"title\":\"Banana\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://fierce-oasis-76941.herokuapp.com/albums",
+									"protocol": "https",
+									"host": [
+										"fierce-oasis-76941",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"albums"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "POST/albums-02",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "banananana",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "bob@mail.se",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"title\":\"gelatooooo\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://fierce-oasis-76941.herokuapp.com/albums",
+									"protocol": "https",
+									"host": [
+										"fierce-oasis-76941",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"albums"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET/albums",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "banananana",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "bob@mail.se",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://fierce-oasis-76941.herokuapp.com/albums",
+									"protocol": "https",
+									"host": [
+										"fierce-oasis-76941",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"albums"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET/albums/id:1",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "banananana",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "bob@mail.se",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://fierce-oasis-76941.herokuapp.com/albums/1",
+									"protocol": "https",
+									"host": [
+										"fierce-oasis-76941",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"albums",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "PUT/albums-01",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "banananana",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "bob@mail.se",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"title\":\"Bananananana!\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://fierce-oasis-76941.herokuapp.com/albums/1",
+									"protocol": "https",
+									"host": [
+										"fierce-oasis-76941",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"albums",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "POST/albums/id:1/photos",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "banananana",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "bob@mail.se",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"photo_id\":1\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://fierce-oasis-76941.herokuapp.com/albums/1/photos",
+									"protocol": "https",
+									"host": [
+										"fierce-oasis-76941",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"albums",
+										"1",
+										"photos"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "POST/register-Bob",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\":\"bob@mail.se\",\n    \"password\":\"banananana\",\n    \"first_name\":\"Bob\",\n    \"last_name\":\"Minion\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://fierce-oasis-76941.herokuapp.com/register",
+							"protocol": "https",
+							"host": [
+								"fierce-oasis-76941",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User-02",
+			"item": [
+				{
+					"name": "albums",
+					"item": [
+						{
+							"name": "POST/albums",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "belloooo",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "kevin@mail.se",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"title\":\"Bello!\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://fierce-oasis-76941.herokuapp.com/albums",
+									"protocol": "https",
+									"host": [
+										"fierce-oasis-76941",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"albums"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "POST/albums/id:21/photos",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "belloooo",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "kevin@mail.se",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"photo_id\":31\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://fierce-oasis-76941.herokuapp.com/albums/21/photos",
+									"protocol": "https",
+									"host": [
+										"fierce-oasis-76941",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"albums",
+										"21",
+										"photos"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET/albums",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "belloooo",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "kevin@mail.se",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://fierce-oasis-76941.herokuapp.com/albums",
+									"protocol": "https",
+									"host": [
+										"fierce-oasis-76941",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"albums"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET/albums/id:21",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "belloooo",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "kevin@mail.se",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://fierce-oasis-76941.herokuapp.com/albums/21",
+									"protocol": "https",
+									"host": [
+										"fierce-oasis-76941",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"albums",
+										"21"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "photos",
+					"item": [
+						{
+							"name": "POST/albums",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "belloooo",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "kevin@mail.se",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"title\": \"Aaaaah!\",\n  \"url\": \"https://images.unsplash.com/photo-1593871075120-982e042088d8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2342&q=80\",\n  \"comment\": \"Aaaaah!\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://fierce-oasis-76941.herokuapp.com/photos",
+									"protocol": "https",
+									"host": [
+										"fierce-oasis-76941",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"photos"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET/photos",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "belloooo",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "kevin@mail.se",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://fierce-oasis-76941.herokuapp.com/photos",
+									"protocol": "https",
+									"host": [
+										"fierce-oasis-76941",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"photos"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET/photos/id:31",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "belloooo",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "kevin@mail.se",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://fierce-oasis-76941.herokuapp.com/photos/31",
+									"protocol": "https",
+									"host": [
+										"fierce-oasis-76941",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"photos",
+										"31"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "POST/register-Kevin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\":\"kevin@mail.se\",\n    \"password\":\"belloooo\",\n    \"first_name\":\"Kevin\",\n    \"last_name\":\"Minion\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://fierce-oasis-76941.herokuapp.com/register",
+							"protocol": "https",
+							"host": [
+								"fierce-oasis-76941",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

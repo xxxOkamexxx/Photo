@@ -20,9 +20,9 @@ const createRules = [
 
 		return Promise.resolve();
 	}),
-	body('password').exists().isLength({ min: 6 }),
-	body('first_name').isLength({ min: 3 }),
-	body('last_name').isLength({ min: 3 }),
+	body('password').exists().trim().isLength({ min: 6 }),
+	body('first_name').trim().isLength({ min: 3 }),
+	body('last_name').trim().isLength({ min: 3 }),
 	/**
 	 *  email string required must be a valid email and not already exist
 	 * password string required must be at least 6 chars long
@@ -39,17 +39,18 @@ const createRules = [
  * Optional: title
  */
 const updateRules = [
-	body('email').exists().optional().isEmail().custom(async value => {
-		const user = await new models.User({ email: value }).fetch({ require: false });
-		if (user) {
+	/* body('user_id').exists().trim().isInt(),
+	body('email').exists().isEmail().trim().isString().custom(async value => {
+		const email = await new models.User({ email: value }).fetch({ require: false });
+		if (email) {
 			return Promise.reject("Email already exists.")
 		}
 
 		return Promise.resolve();
-	}),
-	body('password').optional().isLength({ min: 6 }),
-	body('first_name').optional().isLength({ min: 3 }),
-	body('last_name').optional().isLength({ min: 3 }),
+	}), */
+	body('password').exists().trim().isLength({ min: 6 }),
+	body('first_name').exists().trim().isLength({ min: 3 }),
+	body('last_name').exists().trim().isLength({ min: 3 }),
 	/**
 	 * email string required must be a valid email and exist
 	 * password string required must be at least 6 chars long

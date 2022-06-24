@@ -8,18 +8,19 @@
  *
  * GET /:userId
  */
-const getUser = async (req, res) => {
-	const user = await new models.User({ id: req.params.userId })
-		.fetch({ withRelated:['albums','photos']});
+// const getUser = async (req, res) => {
+// 	const user = await req.user.load('albums', 'photos')
+// 	/* const user = await new models.User({ id: req.params.userId })
+// 		.fetch({ withRelated:['albums','photos']}); */
 
-	res.send({
-		status: 'success',
-		data: user,
-	});
-}
+// 	res.send({
+// 		status: 'success',
+// 		data: user,
+// 	});
+// }
 
 
 
-module.exports = {
-	getUser,
-}
+// module.exports = {
+// 	getUser,
+// }
